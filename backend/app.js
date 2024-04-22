@@ -6,7 +6,7 @@ const stuffRoutes = require("./routes/stuff.js");
 const userRoutes = require("./routes/user.js");
 const path = require('path');
 
-mongoose.connect("mongodb+srv://benjaminmazars:TMDmbXohG7NjlMa7@projet6.ijnp1yx.mongodb.net/?retryWrites=true&w=majority&appName=Projet6")
+mongoose.connect("mongodb+srv://benjaminmazars:7I1TdReD1Or1pheD@vieux-grimoire.h9ufbs5.mongodb.net/?retryWrites=true&w=majority&appName=Vieux-grimoire")
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 const app = express();
