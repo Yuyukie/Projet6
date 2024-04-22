@@ -1,14 +1,15 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
+const path = require('path');
 
 const bookRoutes = require("./routes/book.js");
 const userRoutes = require("./routes/user.js");
-const path = require('path');
 
 mongoose.connect("mongodb+srv://benjaminmazars:7I1TdReD1Or1pheD@vieux-grimoire.h9ufbs5.mongodb.net/?retryWrites=true&w=majority&appName=Vieux-grimoire")
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
+
 const app = express();
 
 app.use(express.json());
