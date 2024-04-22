@@ -25,7 +25,7 @@ exports.createBook = (req, res, next) => {
 
   
     delete bookObject._userId;
-    book.findOne({_id: req.params.id})
+    Book.findOne({_id: req.params.id})
         .then((book) => {
             if (book.userId != req.auth.userId) {
                 res.status(401).json({ message : 'Not authorized'});
@@ -65,7 +65,7 @@ exports.getOneBook = (req, res, next) => {
       .catch(error => res.status(404).json({ error }));
 }; 
 
-exports.getAllFind =  (req, res, next) => {
+exports.getAllBooks =  (req, res, next) => {
     Book.find()
         .then(books => res.status(200).json(books))
         .catch(error => res.status(400).json({ error }));

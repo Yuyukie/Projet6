@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 
-const stuffRoutes = require("./routes/stuff.js");
+const bookRoutes = require("./routes/book.js");
 const userRoutes = require("./routes/user.js");
 const path = require('path');
 
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
-app.use("/api/stuff", stuffRoutes);
+app.use("/api/books", bookRoutes);
 app.use("/api/auth", userRoutes);
 app.use("/images", express.static(path.join(__dirname, "images")));
 
