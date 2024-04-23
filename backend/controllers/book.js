@@ -111,8 +111,11 @@ exports.giveRating = (req, res, next) => {
       .catch((error) => res.status(400).json({ error }));
   };
 
-/*exports.bestRating = (req, res, next) => {
-    const rating = req.body.ratings;
-    const booksBestRatings = Book.find({}, 'averageRating').sort({ averageRating: -1 }).limit(3);
-    res.status(200).json(booksBestRatings);
-}*/
+  exports.bestRating = (req, res, next) => {
+    // Recherche des trois livres avec les meilleures notes et sélection uniquement le champ 'averageRating'
+    Book.find()
+        .sort({ averageRating: -1 }) // Trier par ordre décroissant de 'averageRating'
+        .limit(3) // Limiter à trois résultats
+        .then((books) => {res.status(200).json(books)})
+        .catch((error) => res.status(500).json({error})
+    )};
