@@ -9,7 +9,7 @@ exports.createBook = (req, res, next) => {
     const book = new Book({
         ...bookObject,
         userId: req.auth.userId,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.sharpFileName}`
     });
   
     book.save()
@@ -110,3 +110,9 @@ exports.giveRating = (req, res, next) => {
       })
       .catch((error) => res.status(400).json({ error }));
   };
+
+/*exports.bestRating = (req, res, next) => {
+    const rating = req.body.ratings;
+    const booksBestRatings = Book.find({}, 'averageRating').sort({ averageRating: -1 }).limit(3);
+    res.status(200).json(booksBestRatings);
+}*/
