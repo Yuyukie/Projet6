@@ -100,11 +100,10 @@ exports.giveRating = (req, res, next) => {
   
         book.ratings.push({ userId, grade });
         const totalRating = book.ratings.reduce((acc, currentValue) => acc + currentValue.grade,0);
-        const averageRating = totalRating / (book.ratings.length+1);
+        const averageRating = totalRating / (book.ratings.length);
         book.averageRating = averageRating.toFixed(1);
         
-        book
-          .save()
+        book.save()
           .then(() => res.status(200).json(book))
           .catch((error) => res.status(400).json({ error }));
       })

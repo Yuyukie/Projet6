@@ -1,20 +1,26 @@
-const bcrypt = require("bcrypt")
-const User = require("../models/user")
+const bcrypt = require("bcrypt");
+const User = require("../models/user");
 const jwt = require('jsonwebtoken');
+const validator = require('validator');
 
 
 exports.signup = (req, res, next) => {
+    // Vérifier si un e-mail est fourni et s'il correspond à un format valide
+    if (!req.body.email || !validator.isEmail(req.body.email)) {
+        return res.status(400).json({ error: "L'e-mail fourni n'est pas valide." });
+    }
+
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
-            const user = new User ({
-                email : req.body.email,
-                password : hash
+            const user = new User({
+                email: req.body.email,
+                password: hash
             });
             user.save()
-            .then(()=> res.status(201).json({message:"User cree"}))
-            .catch(error => res.status(400).json({error}))
+                .then(() => res.status(201).json({ message: "Utilisateur créé" }))
+                .catch(error => res.status(400).json({ error }));
         })
-        .catch(error => res.status(500).json({error}))
+        .catch(error => res.status(500).json({ error }));
 };
 
 exports.login = (req, res, next) => {
